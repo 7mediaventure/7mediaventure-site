@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Demo Pages — Seven Media Venture</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:-apple-system,sans-serif;background:#f5f5f7;padding:48px 32px;color:#1d1d1f;min-height:100vh}
+h1{font-size:22px;font-weight:700;margin-bottom:6px}
+.meta{font-size:13px;color:#86868b;margin-bottom:28px}
+.row{display:flex;align-items:center;gap:10px;margin-bottom:14px;flex-wrap:wrap}
+.label{font-size:13px;color:#86868b;white-space:nowrap}
+btn,button{font-size:13px;padding:7px 14px;border-radius:980px;border:1px solid #d2d2d7;background:#fff;color:#1d1d1f;cursor:pointer;transition:all .15s;font-family:inherit}
+button.active{background:#1d1d1f;color:#fff;border-color:#1d1d1f}
+button:hover:not(.active){background:#f0f0f5}
+.search-input{font-size:13px;padding:7px 16px;border-radius:980px;border:1px solid #d2d2d7;background:#fff;color:#1d1d1f;outline:none;width:230px}
+.search-input:focus{border-color:#86868b}
+.date-range{display:flex;align-items:center;gap:8px;background:#fff;border:1px solid #d2d2d7;border-radius:14px;padding:8px 16px}
+.date-range input[type=date]{border:none;background:transparent;font-size:13px;color:#1d1d1f;outline:none;cursor:pointer;font-family:inherit}
+.date-range .sep{color:#c7c7cc;font-size:16px;margin:0 2px}
+.clear-date{font-size:12px;color:#86868b;background:none;border:none;cursor:pointer;padding:2px 6px;border-radius:6px}
+.clear-date:hover{background:#f0f0f5;color:#1d1d1f}
+.quick-btns{display:flex;gap:6px;flex-wrap:wrap}
+.divider{width:100%;height:1px;background:#e8e8ed;margin:6px 0}
+.count{font-size:13px;color:#86868b;margin-bottom:12px}
+.grid{display:flex;flex-direction:column;gap:8px;max-width:760px}
+a.card{display:flex;align-items:center;gap:16px;background:#fff;border-radius:14px;padding:14px 20px;text-decoration:none;color:#1d1d1f;box-shadow:0 2px 8px rgba(0,0,0,.06);transition:box-shadow .15s}
+a.card:hover{box-shadow:0 4px 16px rgba(0,0,0,.12)}
+.card-left{flex:1;min-width:0}
+.name{font-size:15px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.desc{font-size:12px;color:#5f7a96;margin-top:3px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:460px}
+.url{font-size:12px;color:#86868b;margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.date-badge{font-size:11px;font-weight:500;color:#86868b;background:#f0f0f5;padding:4px 10px;border-radius:980px;white-space:nowrap;flex-shrink:0}
+.arrow{font-size:18px;color:#c7c7cc;flex-shrink:0}
+</style>
+</head>
+<body>
+<h1>Demo Pages</h1>
+<p class="meta">Last updated: June 18, 2026 at 22:37</p>
+
+<div class="row">
+  <span class="label">Sort:</span>
+  <button id="btnName" class="active" onclick="setSort('name')">Name A–Z</button>
+  <button id="btnNew" onclick="setSort('new')">Newest first</button>
+  <button id="btnOld" onclick="setSort('old')">Oldest first</button>
+  <input class="search-input" id="search" placeholder="🔍  Search company..." oninput="render()" />
+</div>
+
+<div class="row">
+  <span class="label">Date range:</span>
+  <div class="date-range">
+    <input type="date" id="dateFrom" onchange="render()" />
+    <span class="sep">→</span>
+    <input type="date" id="dateTo" onchange="render()" />
+    <button class="clear-date" onclick="clearDates()" title="Clear dates">✕</button>
+  </div>
+  <div class="quick-btns">
+    <button onclick="setRange('thismonth')">This month</button>
+    <button onclick="setRange('lastmonth')">Last month</button>
+    <button onclick="setRange('thisyear')">This year</button>
+    <button onclick="setRange('all')">All time</button>
+  </div>
+</div>
+
+<p class="count" id="count"></p>
+<div class="grid" id="grid"></div>
+
+<script>
+var data=[{"slug": "vresh", "name": "Vresh", "date": "2026-06-17", "desc": "Construction company delivering high-quality commercial build projects with modern methods.", "cat": "construction-1", "url": "https://7mediaventure.com/vresh"}, {"slug": "csfactory", "name": "Csfactory", "date": "2026-06-17", "desc": "Commercial construction company specializing in retail and restaurant build-outs.", "cat": "construction-2", "url": "https://7mediaventure.com/csfactory"}, {"slug": "oregon-wild", "name": "Oregon Wild", "date": "2026-06-17", "desc": "Oregon's oldest environmental nonprofit protecting wildlands, wildlife, and waterways.", "cat": "b1", "url": "https://7mediaventure.com/oregon-wild"}, {"slug": "turnpoint-services", "name": "TurnPoint Services", "date": "2026-06-17", "desc": "Home services company providing HVAC, plumbing, electrical, and maintenance across multiple brands.", "cat": "b1", "url": "https://7mediaventure.com/turnpoint-services"}, {"slug": "systems-planning-analysis", "name": "Systems Planning & Analysis", "date": "2026-06-17", "desc": "Defense and national security consulting firm supporting U.S. government agencies and programs.", "cat": "b1", "url": "https://7mediaventure.com/systems-planning-analysis"}, {"slug": "goodwill-industries-international", "name": "Goodwill Industries International", "date": "2026-06-17", "desc": "Nonprofit delivering job training, employment services, and community programs through thrift retail.", "cat": "b1", "url": "https://7mediaventure.com/goodwill-industries-international"}, {"slug": "algolia", "name": "Algolia", "date": "2026-06-17", "desc": "Search & Discovery API platform that helps businesses build fast, relevant search experiences.", "cat": "b1", "url": "https://7mediaventure.com/algolia"}, {"slug": "egym", "name": "EGYM", "date": "2026-06-17", "desc": "Smart fitness platform connecting gym equipment with data-driven training software and health insights.", "cat": "b1", "url": "https://7mediaventure.com/egym"}, {"slug": "the-standard", "name": "The Standard", "date": "2026-06-17", "desc": "Insurance and financial services company offering life, disability, and retirement solutions.", "cat": "b1", "url": "https://7mediaventure.com/the-standard"}, {"slug": "instride", "name": "InStride", "date": "2026-06-17", "desc": "Workforce education company helping employers fund career-aligned college degrees for their employees.", "cat": "b1", "url": "https://7mediaventure.com/instride"}, {"slug": "mountain-hardwear", "name": "Mountain Hardwear", "date": "2026-06-17", "desc": "Outdoor apparel and equipment brand engineered for mountaineering, climbing, and alpine conditions.", "cat": "b1", "url": "https://7mediaventure.com/mountain-hardwear"}, {"slug": "x-energy", "name": "X-energy", "date": "2026-06-17", "desc": "Advanced nuclear energy company developing small modular reactors for clean, reliable power generation.", "cat": "b1", "url": "https://7mediaventure.com/x-energy"}, {"slug": "lululemon", "name": "lululemon", "date": "2026-06-17", "desc": "Premium athletic apparel brand known for high-performance yoga, running, and lifestyle clothing.", "cat": "b1", "url": "https://7mediaventure.com/lululemon"}, {"slug": "cleanchoice-energy", "name": "CleanChoice Energy", "date": "2026-06-17", "desc": "Renewable energy supplier providing 100% clean wind and solar power to homes and businesses.", "cat": "b1", "url": "https://7mediaventure.com/cleanchoice-energy"}, {"slug": "capital-one", "name": "Capital One", "date": "2026-06-17", "desc": "Major U.S. bank offering credit cards, checking, savings, auto loans, and digital-first financial services.", "cat": "b1", "url": "https://7mediaventure.com/capital-one"}, {"slug": "pacific-seafood", "name": "Pacific Seafood", "date": "2026-06-17", "desc": "Pacific Northwest's leading seafood processor and distributor, serving restaurants and retailers.", "cat": "b1", "url": "https://7mediaventure.com/pacific-seafood"}, {"slug": "motosport-com", "name": "MotoSport.com", "date": "2026-06-17", "desc": "Online retailer of motorcycle, dirt bike, and powersports gear, parts, and accessories.", "cat": "b1", "url": "https://7mediaventure.com/motosport-com"}, {"slug": "bergeson-campbell-p-c", "name": "Bergeson & Campbell, P.C.", "date": "2026-06-17", "desc": "Washington D.C. law firm focused on environmental law, pesticides, and chemical regulatory compliance.", "cat": "b1", "url": "https://7mediaventure.com/bergeson-campbell-p-c"}, {"slug": "scott-edwards-architecture", "name": "Scott Edwards Architecture", "date": "2026-06-17", "desc": "Portland architecture firm designing innovative commercial and residential spaces.", "cat": "b1", "url": "https://7mediaventure.com/scott-edwards-architecture"}, {"slug": "nuna", "name": "Nuna", "date": "2026-06-17", "desc": "Premium baby gear brand creating safety-focused, thoughtfully designed products for modern families.", "cat": "b1", "url": "https://7mediaventure.com/nuna"}, {"slug": "tuckernuck", "name": "Tuckernuck", "date": "2026-06-17", "desc": "American clothing brand offering classic, preppy styles for men and women with a coastal aesthetic.", "cat": "b1", "url": "https://7mediaventure.com/tuckernuck"}, {"slug": "primahomesnw", "name": "Prima Homes NW", "date": "2026-06-17", "desc": "Custom homebuilder in the Pacific Northwest crafting quality residential homes with modern design.", "cat": "b4 products", "url": "https://7mediaventure.com/primahomesnw"}, {"slug": "dumbarton-house", "name": "Dumbarton House", "date": "2026-06-18", "desc": "", "cat": "events", "url": "https://7mediaventure.com/dumbarton-house"}, {"slug": "event-pro-strategies", "name": "Event Pro Strategies", "date": "2026-06-18", "desc": "", "cat": "events", "url": "https://7mediaventure.com/event-pro-strategies"}, {"slug": "alt", "name": "Alt", "date": "2026-06-18", "desc": "Buy and sell graded sports cards on Alt. Pay $0 sales tax and save on shipping fees.", "cat": "events", "url": "https://7mediaventure.com/alt"}, {"slug": "imperative-logistics", "name": "Imperative Logistics Group", "date": "2026-06-18", "desc": "", "cat": "hr", "url": "https://7mediaventure.com/imperative-logistics"}, {"slug": "signature-graphics", "name": "Signature Graphics", "date": "2026-06-18", "desc": "Need professional high-volume commercial printing services? Signature Graphics offers quality prints for ad circulars, publicat...", "cat": "retail-design", "url": "https://7mediaventure.com/signature-graphics"}, {"slug": "creative-safety-supply", "name": "Creative Safety Supply", "date": "2026-06-18", "desc": "No matter what your industry, we re here to help. We supply visual communication resources to keep your operations running effi...", "cat": "hr", "url": "https://7mediaventure.com/creative-safety-supply"}, {"slug": "forth", "name": "Forth", "date": "2026-06-18", "desc": "Forth is a nonprofit organization dedicated to increasing equitable access to electric transportation through demonstration pro...", "cat": "events", "url": "https://7mediaventure.com/forth"}, {"slug": "nibs", "name": "National Institute of Building Sciences", "date": "2026-06-18", "desc": "", "cat": "events", "url": "https://7mediaventure.com/nibs"}, {"slug": "hennebery-eddy", "name": "Hennebery Eddy Architects", "date": "2026-06-18", "desc": "", "cat": "construction-1", "url": "https://7mediaventure.com/hennebery-eddy"}];
+var order='name';
+
+function setSort(o){
+  order=o;
+  document.querySelectorAll('.row button[id^=btn]').forEach(function(b){b.classList.remove('active')});
+  document.getElementById('btn'+o.charAt(0).toUpperCase()+o.slice(1)).classList.add('active');
+  render();
+}
+
+function pad(n){return n<10?'0'+n:n;}
+function toISO(d){return d.getFullYear()+'-'+pad(d.getMonth()+1)+'-'+pad(d.getDate());}
+
+function setRange(r){
+  var now=new Date();
+  var y=now.getFullYear(), m=now.getMonth();
+  var from,to;
+  if(r==='thismonth'){
+    from=new Date(y,m,1); to=new Date(y,m+1,0);
+  }else if(r==='lastmonth'){
+    from=new Date(y,m-1,1); to=new Date(y,m,0);
+  }else if(r==='thisyear'){
+    from=new Date(y,0,1); to=new Date(y,11,31);
+  }else{
+    clearDates(); return;
+  }
+  document.getElementById('dateFrom').value=toISO(from);
+  document.getElementById('dateTo').value=toISO(to);
+  render();
+}
+
+function clearDates(){
+  document.getElementById('dateFrom').value='';
+  document.getElementById('dateTo').value='';
+  render();
+}
+
+function fmt(d){
+  if(!d) return '—';
+  var p=d.split('-');
+  var mo=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+  return mo[parseInt(p[1])-1]+' '+parseInt(p[2])+', '+p[0];
+}
+
+function render(){
+  var q=(document.getElementById('search').value||'').toLowerCase();
+  var from=document.getElementById('dateFrom').value;
+  var to=document.getElementById('dateTo').value;
+  var rows=data.filter(function(r){
+    if(q&&!r.name.toLowerCase().includes(q)&&!r.slug.includes(q)&&!(r.desc||'').toLowerCase().includes(q)) return false;
+    if(from&&r.date&&r.date<from) return false;
+    if(to&&r.date&&r.date>to) return false;
+    return true;
+  });
+  if(order==='name') rows.sort(function(a,b){return a.name.localeCompare(b.name);});
+  else if(order==='new') rows.sort(function(a,b){return (b.date||'').localeCompare(a.date||'');});
+  else rows.sort(function(a,b){return (a.date||'').localeCompare(b.date||'');});
+  var total=data.length;
+  document.getElementById('count').textContent=rows.length===total?total+' companies':rows.length+' of '+total+' companies';
+  document.getElementById('grid').innerHTML=rows.map(function(r){
+    var descHtml=r.desc?'<div class="desc">'+r.desc+'</div>':'';
+    return '<a class="card" href="'+r.url+'" target="_blank">'
+      +'<div class="card-left"><div class="name">'+r.name+'</div>'+descHtml+'<div class="url">'+r.url+'</div></div>'
+      +'<span class="date-badge">'+fmt(r.date)+'</span>'
+      +'<span class="arrow">›</span>'
+      +'</a>';
+  }).join('');
+}
+render();
+</script>
+</body>
+</html>
