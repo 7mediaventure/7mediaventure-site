@@ -6,8 +6,14 @@
 <meta name="robots" content="noindex, nofollow">
 <title>Your Personal Demo Page &#8212; Seven Media Venture</title>
 <script>
-/* Owner opt-out: if cookie ga_opt_out=1 is set, disable tracking */
-(function(){var id="G-X5CM5RD7XK";if(document.cookie.indexOf("ga_opt_out=1")!==-1)window["ga-disable-"+id]=true;})();
+/* Owner opt-out: cookie OR office IP -> disable tracking */
+(function(){
+  var id="G-X5CM5RD7XK";
+  var excluded=["76.105.150.79"];
+  function disable(){window["ga-disable-"+id]=true;document.cookie="ga_opt_out=1;expires=Fri,31 Dec 2099 23:59:59 GMT;path=/;domain=.7mediaventure.com";}
+  if(document.cookie.indexOf("ga_opt_out=1")!==-1){disable();return;}
+  if(excluded.length){fetch("https://api.ipify.org?format=json").then(function(r){return r.json();}).then(function(d){if(excluded.indexOf(d.ip)!==-1)disable();}).catch(function(){});}
+})();
 </script>
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-X5CM5RD7XK"></script>
 <script>
@@ -99,16 +105,16 @@ footer{border-top:.5px solid var(--gray-300);padding:32px 44px;display:flex;just
 <div class="gallery-wrap ">
   <div class="gal-track" id="galTrack">
     
-    <img src="../photos/construction-2/photo8.jpg" alt="Csfactory photo 1" loading="lazy">
+    <img src="../photos/construction-2/photo3.jpg" alt="Csfactory photo 1" loading="lazy">
     <img src="../photos/construction-2/photo6.jpg" alt="Csfactory photo 2" loading="lazy">
-    <img src="../photos/construction-2/photo4.jpg" alt="Csfactory photo 3" loading="lazy">
-    <img src="../photos/construction-2/photo10.jpg" alt="Csfactory photo 4" loading="lazy">
-    <img src="../photos/construction-2/photo7.jpg" alt="Csfactory photo 5" loading="lazy">
-    <img src="../photos/construction-2/photo1.jpg" alt="Csfactory photo 6" loading="lazy">
-    <img src="../photos/construction-2/photo5.jpg" alt="Csfactory photo 7" loading="lazy">
-    <img src="../photos/construction-2/photo9.jpg" alt="Csfactory photo 8" loading="lazy">
-    <img src="../photos/construction-2/photo2.jpg" alt="Csfactory photo 9" loading="lazy">
-    <img src="../photos/construction-2/photo3.jpg" alt="Csfactory photo 10" loading="lazy">
+    <img src="../photos/construction-2/photo5.jpg" alt="Csfactory photo 3" loading="lazy">
+    <img src="../photos/construction-2/photo7.jpg" alt="Csfactory photo 4" loading="lazy">
+    <img src="../photos/construction-2/photo2.jpg" alt="Csfactory photo 5" loading="lazy">
+    <img src="../photos/construction-2/photo9.jpg" alt="Csfactory photo 6" loading="lazy">
+    <img src="../photos/construction-2/photo1.jpg" alt="Csfactory photo 7" loading="lazy">
+    <img src="../photos/construction-2/photo8.jpg" alt="Csfactory photo 8" loading="lazy">
+    <img src="../photos/construction-2/photo4.jpg" alt="Csfactory photo 9" loading="lazy">
+    <img src="../photos/construction-2/photo10.jpg" alt="Csfactory photo 10" loading="lazy">
   </div>
   <button class="gal-btn gal-prev" onclick="galMove(-1)">&#8249;</button>
   <button class="gal-btn gal-next" onclick="galMove(1)">&#8250;</button>
