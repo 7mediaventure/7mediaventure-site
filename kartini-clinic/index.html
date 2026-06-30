@@ -9,7 +9,7 @@
 /* Owner opt-out: cookie OR office IP -> disable tracking */
 (function(){
   var id="G-X5CM5RD7XK";
-  var excluded=["76.105.150.79"];
+  var excluded=["76.105.150.79","97.120.156.88"];
   function disable(){window["ga-disable-"+id]=true;document.cookie="ga_opt_out=1;expires=Fri,31 Dec 2099 23:59:59 GMT;path=/;domain=.7mediaventure.com";}
   if(document.cookie.indexOf("ga_opt_out=1")!==-1){disable();return;}
   if(excluded.length){fetch("https://api.ipify.org?format=json").then(function(r){return r.json();}).then(function(d){if(excluded.indexOf(d.ip)!==-1)disable();}).catch(function(){});}
@@ -105,37 +105,37 @@ footer{border-top:.5px solid var(--gray-300);padding:32px 44px;display:flex;just
 <div class="gallery-wrap mixed">
   <div class="gal-track" id="galTrack">
     
-    <img src="../photos/hr/photo6.jpg" alt="Kartini Clinic photo 1" loading="lazy">
-    <img src="../photos/hr/photo24.jpg" alt="Kartini Clinic photo 2" loading="lazy">
-    <img src="../photos/hr/photo18.jpg" alt="Kartini Clinic photo 3" loading="lazy">
-    <img src="../photos/hr/photo7.jpg" alt="Kartini Clinic photo 4" loading="lazy">
-    <img src="../photos/hr/photo26.jpg" alt="Kartini Clinic photo 5" loading="lazy">
-    <img src="../photos/hr/photo29.jpg" alt="Kartini Clinic photo 6" loading="lazy">
-    <img src="../photos/hr/photo2.jpg" alt="Kartini Clinic photo 7" loading="lazy">
-    <img src="../photos/hr/photo27.jpg" alt="Kartini Clinic photo 8" loading="lazy">
-    <img src="../photos/hr/photo11.jpg" alt="Kartini Clinic photo 9" loading="lazy">
-    <img src="../photos/hr/photo22.jpg" alt="Kartini Clinic photo 10" loading="lazy">
-    <img src="../photos/hr/photo5.jpg" alt="Kartini Clinic photo 11" loading="lazy">
-    <img src="../photos/hr/photo17.jpg" alt="Kartini Clinic photo 12" loading="lazy">
-    <img src="../photos/hr/photo16.jpg" alt="Kartini Clinic photo 13" loading="lazy">
-    <img src="../photos/hr/photo20.jpg" alt="Kartini Clinic photo 14" loading="lazy">
-    <img src="../photos/hr/photo10.jpg" alt="Kartini Clinic photo 15" loading="lazy">
-    <img src="../photos/hr/photo23.jpg" alt="Kartini Clinic photo 16" loading="lazy">
-    <img src="../photos/hr/photo28.jpg" alt="Kartini Clinic photo 17" loading="lazy">
-    <img src="../photos/hr/photo8.jpg" alt="Kartini Clinic photo 18" loading="lazy">
-    <img src="../photos/hr/photo19.jpg" alt="Kartini Clinic photo 19" loading="lazy">
-    <img src="../photos/hr/photo21.jpg" alt="Kartini Clinic photo 20" loading="lazy">
-    <img src="../photos/hr/photo25.jpg" alt="Kartini Clinic photo 21" loading="lazy">
-    <img src="../photos/hr/photo9.jpg" alt="Kartini Clinic photo 22" loading="lazy">
-    <img src="../photos/hr/photo3.jpg" alt="Kartini Clinic photo 23" loading="lazy">
-    <img src="../photos/hr/photo15.jpg" alt="Kartini Clinic photo 24" loading="lazy">
-    <img src="../photos/hr/photo14.jpg" alt="Kartini Clinic photo 25" loading="lazy">
-    <img src="../photos/hr/photo31.jpg" alt="Kartini Clinic photo 26" loading="lazy">
-    <img src="../photos/hr/photo13.jpg" alt="Kartini Clinic photo 27" loading="lazy">
-    <img src="../photos/hr/photo4.jpg" alt="Kartini Clinic photo 28" loading="lazy">
-    <img src="../photos/hr/photo12.jpg" alt="Kartini Clinic photo 29" loading="lazy">
-    <img src="../photos/hr/photo30.jpg" alt="Kartini Clinic photo 30" loading="lazy">
-    <img src="../photos/hr/photo1.jpg" alt="Kartini Clinic photo 31" loading="lazy">
+    <img src="../photos/hr/photo13.jpg" alt="Kartini Clinic photo 1" loading="lazy">
+    <img src="../photos/hr/photo22.jpg" alt="Kartini Clinic photo 2" loading="lazy">
+    <img src="../photos/hr/photo20.jpg" alt="Kartini Clinic photo 3" loading="lazy">
+    <img src="../photos/hr/photo14.jpg" alt="Kartini Clinic photo 4" loading="lazy">
+    <img src="../photos/hr/photo25.jpg" alt="Kartini Clinic photo 5" loading="lazy">
+    <img src="../photos/hr/photo18.jpg" alt="Kartini Clinic photo 6" loading="lazy">
+    <img src="../photos/hr/photo6.jpg" alt="Kartini Clinic photo 7" loading="lazy">
+    <img src="../photos/hr/photo10.jpg" alt="Kartini Clinic photo 8" loading="lazy">
+    <img src="../photos/hr/photo30.jpg" alt="Kartini Clinic photo 9" loading="lazy">
+    <img src="../photos/hr/photo2.jpg" alt="Kartini Clinic photo 10" loading="lazy">
+    <img src="../photos/hr/photo26.jpg" alt="Kartini Clinic photo 11" loading="lazy">
+    <img src="../photos/hr/photo15.jpg" alt="Kartini Clinic photo 12" loading="lazy">
+    <img src="../photos/hr/photo21.jpg" alt="Kartini Clinic photo 13" loading="lazy">
+    <img src="../photos/hr/photo3.jpg" alt="Kartini Clinic photo 14" loading="lazy">
+    <img src="../photos/hr/photo19.jpg" alt="Kartini Clinic photo 15" loading="lazy">
+    <img src="../photos/hr/photo8.jpg" alt="Kartini Clinic photo 16" loading="lazy">
+    <img src="../photos/hr/photo4.jpg" alt="Kartini Clinic photo 17" loading="lazy">
+    <img src="../photos/hr/photo31.jpg" alt="Kartini Clinic photo 18" loading="lazy">
+    <img src="../photos/hr/photo27.jpg" alt="Kartini Clinic photo 19" loading="lazy">
+    <img src="../photos/hr/photo5.jpg" alt="Kartini Clinic photo 20" loading="lazy">
+    <img src="../photos/hr/photo17.jpg" alt="Kartini Clinic photo 21" loading="lazy">
+    <img src="../photos/hr/photo1.jpg" alt="Kartini Clinic photo 22" loading="lazy">
+    <img src="../photos/hr/photo23.jpg" alt="Kartini Clinic photo 23" loading="lazy">
+    <img src="../photos/hr/photo29.jpg" alt="Kartini Clinic photo 24" loading="lazy">
+    <img src="../photos/hr/photo16.jpg" alt="Kartini Clinic photo 25" loading="lazy">
+    <img src="../photos/hr/photo12.jpg" alt="Kartini Clinic photo 26" loading="lazy">
+    <img src="../photos/hr/photo11.jpg" alt="Kartini Clinic photo 27" loading="lazy">
+    <img src="../photos/hr/photo9.jpg" alt="Kartini Clinic photo 28" loading="lazy">
+    <img src="../photos/hr/photo7.jpg" alt="Kartini Clinic photo 29" loading="lazy">
+    <img src="../photos/hr/photo28.jpg" alt="Kartini Clinic photo 30" loading="lazy">
+    <img src="../photos/hr/photo24.jpg" alt="Kartini Clinic photo 31" loading="lazy">
   </div>
   <button class="gal-btn gal-prev" onclick="galMove(-1)">&#8249;</button>
   <button class="gal-btn gal-next" onclick="galMove(1)">&#8250;</button>
