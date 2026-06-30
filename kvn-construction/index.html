@@ -9,7 +9,7 @@
 /* Owner opt-out: cookie OR office IP -> disable tracking */
 (function(){
   var id="G-X5CM5RD7XK";
-  var excluded=["76.105.150.79"];
+  var excluded=["76.105.150.79","97.120.156.88"];
   function disable(){window["ga-disable-"+id]=true;document.cookie="ga_opt_out=1;expires=Fri,31 Dec 2099 23:59:59 GMT;path=/;domain=.7mediaventure.com";}
   if(document.cookie.indexOf("ga_opt_out=1")!==-1){disable();return;}
   if(excluded.length){fetch("https://api.ipify.org?format=json").then(function(r){return r.json();}).then(function(d){if(excluded.indexOf(d.ip)!==-1)disable();}).catch(function(){});}
